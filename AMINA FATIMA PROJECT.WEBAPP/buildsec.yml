@@ -1,0 +1,26 @@
+version: 0.2
+
+env:
+  parameter-store:
+    DOCKER_REGISTRY_USERNAME: /app/docker-u
+    DOCKER_REGISTRY_PASSWORD: /app/docker-p
+    DOCKER_REGISTRY_URL: /app/docker-url
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+  pre_build:
+    commands:
+      - echo "Installing dependencies..."
+      - pip install -r day-14/simple-python-app/requirements.txt
+  build:
+    commands:
+      - echo "Running tests..."
+      - cd day-14/simple-python-app/
+      - echo "Building Docker image..."
+      - docker login -u "$DOCKER_REGISTRY_USERNAME" --password "$DOCKER_REGISTRY_PASSWORD"
+      - docker build -t "$DOCKER_REGISTRY_USERNAME"/simple-python-flask-app:latest .
+      - docker push "$DOCKER_REGISTRY_USERNAME"/simple-python-flask-app:latest
+  post_build:
+    commands:
+      - echo "Build completed successfully!"
