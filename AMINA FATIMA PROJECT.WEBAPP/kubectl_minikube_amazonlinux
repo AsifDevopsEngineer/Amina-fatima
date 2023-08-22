@@ -13,3 +13,7 @@ mv ./kubectl ~/.local/bin/kubectl
 #step4--------------------------------------------------------------------------
 kubectl version --client
 kubectl version --client --output=yaml
+##################################################################
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+minikube start
