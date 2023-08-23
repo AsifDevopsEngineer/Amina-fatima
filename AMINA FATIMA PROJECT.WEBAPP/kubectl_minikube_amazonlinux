@@ -1,3 +1,4 @@
+##############KUBECTL############################################
 #step1----------------------------------------------------------------------
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 curl -LO https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl
@@ -13,7 +14,14 @@ mv ./kubectl ~/.local/bin/kubectl
 #step4--------------------------------------------------------------------------
 kubectl version --client
 kubectl version --client --output=yaml
-##################################################################
+################DOCKER##############################################
+yum install docker -y
+systemctl start docker
+systemctl enable docker
+useradd newuser
+usermod -aG docker newuser
+su - newuser
+##############MINIKUBE###############################################
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 minikube start
