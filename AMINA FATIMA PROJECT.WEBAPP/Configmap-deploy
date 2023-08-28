@@ -17,11 +17,19 @@ spec:
       containers:
       - name: nginx
         image: nginx:latest
-        env:
-         - name: DB-PORT
-           valueFrom:
-             configMapKeyRef:
-               name: test-demo
-               key: db-port
+          # env:
+          #- name: DB-PORT
+          #valueFrom:
+          #  configMapKeyRef:
+          #    name: test-demo
+          #    key: db-port
+        volumeMounts:
+          - name: db-connection
+            mountPath: /opt
+
         ports:
         - containerPort: 80
+      volumes:
+        - name: db-connection
+          configMap:
+            name: test-demo
