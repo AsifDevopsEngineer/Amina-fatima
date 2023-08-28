@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-demo
+data:
+  db-port: "3306"
+  # property-like keys; each key maps to a simple value
